@@ -8,7 +8,7 @@
   spec:
     containers:
       - name: spark
-        image: heleonu/cluster-apache-spark
+        image: heleonu/spark-and-kubernetes:1
         command: ["/bin/bash", "-c", "while true; do echo 1; sleep 1; done"]
       - name: kube-proxy-sidecar
         image: bitnami/kubectl
