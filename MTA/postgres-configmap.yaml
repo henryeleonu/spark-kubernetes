@@ -1,0 +1,19 @@
+# Create ConfigMap postgres-config for the postgres app
+# Define default database name, user, and password
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  #name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: postgresdb
+  POSTGRES_USER: postgresadmin
+  POSTGRES_PASSWORD: admin123
+
+  #properties = {
+    #"user": "postgres",
+    #"password": "casa1234",
+    #"driver": "org.postgresql.Driver"
+  #}
