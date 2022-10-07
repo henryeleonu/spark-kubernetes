@@ -57,4 +57,5 @@ ln -sf /dev/stdout $SPARK_WORKER_LOG
 
 #COPY start-spark.sh /
 COPY /app /opt/spark-apps
+COPY /data /opt/spark-data
 

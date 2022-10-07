@@ -10,10 +10,10 @@ def init_spark():
   return sql,sc
 
 def main():
-  url = "jdbc:postgresql://demo-database:5432/mta_data"
+  url = "jdbc:postgresql://postgres:5432/mta_data"
   properties = {
-    "user": "postgres",
-    "password": "casa1234",
+    "user": "postgresadmin",
+    "password": "admin123",
     "driver": "org.postgresql.Driver"
   }
   file = "/opt/spark-data/MTA_2014_08_01.csv"
