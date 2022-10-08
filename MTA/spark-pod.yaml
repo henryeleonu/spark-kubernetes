@@ -2,21 +2,21 @@
   apiVersion: v1
   kind: Pod
   metadata:
-    name: spark
-    namespace: spark-and-postgres
+    name: spark12
+    #namespace: spark-and-postgres
     labels:
-      app: spark
+      app: spark12
   spec:
     containers:
-      - name: spark
-        image: heleonu/spark-and-kubernetes:1
-        command: ["/bin/bash", "-c", "while true; do echo 1; sleep 1; done"]
+      - name: spark12
+        image: datamechanics/spark
+        command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
         ports:
           - containerPort: 7077
           - containerPort: 8080
-      - name: kube-proxy-sidecar
-        image: bitnami/kubectl
-        command: ["kubectl", "proxy"]
-        ports:
-          - containerPort: 8001
+      #- name: kube-proxy-sidecar
+        #image: bitnami/kubectl
+        #command: ["kubectl", "proxy"]
+        #ports:
+          #- containerPort: 8001
           

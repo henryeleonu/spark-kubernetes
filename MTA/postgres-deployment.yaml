@@ -9,7 +9,7 @@ metadata:
   name: postgres # Set the name of the deployment
   #namespace: spark-and-postgres
 spec:
-  replicas: 1 # Set 3 deployment replicas
+  replicas: 1 # Set deployment replicas
   selector:
     matchLabels:
       app: postgres
