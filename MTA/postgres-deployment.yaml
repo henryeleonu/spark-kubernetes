@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:10.4  # Docker image
+          image: postgres:10.1  # Docker image
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432  # Exposing the container port 5432 for PostgreSQL client connections.

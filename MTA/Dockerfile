@@ -24,12 +24,12 @@ RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark
 && rm apache-spark.tgz
 
 #Download and uncompress kubernetes
-RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
-RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
-RUN chmod 755 kubernetes/client/bin/kubectl
-RUN mv kubernetes/client/bin/kubectl /bin/
-RUN rm -Rf kubernetes
-RUN rm kubernetes-client-linux-amd64.tar.gz
+#RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
+#RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
+#RUN chmod 755 kubernetes/client/bin/kubectl
+#RUN mv kubernetes/client/bin/kubectl /bin/
+#RUN rm -Rf kubernetes
+#RUN rm kubernetes-client-linux-amd64.tar.gz
 
 
 # Apache spark environment
@@ -56,6 +56,6 @@ ln -sf /dev/stdout $SPARK_MASTER_LOG && \
 ln -sf /dev/stdout $SPARK_WORKER_LOG
 
 #COPY start-spark.sh /
-COPY /app /opt/spark-apps
-COPY /data /opt/spark-data
+COPY ./app /opt/spark-apps
+COPY ./data /opt/spark-data
 
