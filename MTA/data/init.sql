@@ -1,0 +1,3 @@
+CREATE USER mtaadmin;
+CREATE DATABASE mta_data;
+GRANT ALL PRIVILEGES ON DATABASE mta_data TO mtaadmin;

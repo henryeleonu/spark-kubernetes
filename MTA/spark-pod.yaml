@@ -2,14 +2,14 @@
   apiVersion: v1
   kind: Pod
   metadata:
-    name: spark12
+    name: spark-pod
     #namespace: spark-and-postgres
     labels:
-      app: spark12
+      app: spark-pod
   spec:
     containers:
-      - name: spark12
-        image: datamechanics/spark
+      - name: spark-container
+        image: heleonu/spark-pod:1
         command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
         ports:
           - containerPort: 7077
