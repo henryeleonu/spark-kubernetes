@@ -10,10 +10,12 @@
     containers:
       - name: spark-container
         image: heleonu/spark-pod:1
+        imagePullPolicy: "IfNotPresent"
         command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
         ports:
           - containerPort: 7077
           - containerPort: 8080
+    serviceAccountName: spark-sa
       #- name: kube-proxy-sidecar
         #image: bitnami/kubectl
         #command: ["kubectl", "proxy"]

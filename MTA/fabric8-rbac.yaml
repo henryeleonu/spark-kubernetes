@@ -6,7 +6,10 @@
 #metadata:
 #  name: <new-account-name>
 #  namespace: <namespace>
-
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spark-sa
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -15,7 +18,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     # Reference to upper's `metadata.name`
-    name: spark
+    name: spark-sa
     # Reference to upper's `metadata.namespace`
     namespace: default
 roleRef:

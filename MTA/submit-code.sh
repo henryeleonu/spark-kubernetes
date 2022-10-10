@@ -16,9 +16,10 @@
 /opt/spark/bin/spark-submit \
     --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark-sa \
     --master k8s://https://kubernetes.docker.internal:6443 \
-    --deploy-mode cluster \
+    --deploy-mode client \
     --name spark-pi \
-    --conf spark.executor.instances=5 \
+    --class org.apache.spark.examples.SparkPi \
+    --conf spark.executor.instances=2 \
     --conf spark.kubernetes.container.image=heleonu/spark-pod:1 \
     local:///opt/spark/examples/src/main/python/pi.py
     # --class org.apache.spark.examples.SparkPi \
