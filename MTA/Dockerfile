@@ -24,12 +24,12 @@ RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark
 && rm apache-spark.tgz
 
 #Download and uncompress kubernetes
-#RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
-#RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
-#RUN chmod 755 kubernetes/client/bin/kubectl
-#RUN mv kubernetes/client/bin/kubectl /bin/
-#RUN rm -Rf kubernetes
-#RUN rm kubernetes-client-linux-amd64.tar.gz
+RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
+RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
+RUN chmod 755 kubernetes/client/bin/kubectl
+RUN mv kubernetes/client/bin/kubectl /bin/
+RUN rm -Rf kubernetes
+RUN rm kubernetes-client-linux-amd64.tar.gz
 
 
 # Apache spark environment
@@ -37,25 +37,26 @@ FROM builder as apache-spark
 
 WORKDIR /opt/spark
 
-ENV SPARK_MASTER_PORT=7077 \
-SPARK_MASTER_WEBUI_PORT=8080 \
-SPARK_LOG_DIR=/opt/spark/logs \
-SPARK_MASTER_LOG=/opt/spark/logs/spark-master.out \
-SPARK_WORKER_LOG=/opt/spark/logs/spark-worker.out \
-SPARK_WORKER_WEBUI_PORT=8080 \
-SPARK_WORKER_PORT=7000 \
-SPARK_MASTER="spark://spark-master:7077" \
-SPARK_WORKLOAD="master"
+#ENV SPARK_MASTER_PORT=7077 \
+#SPARK_MASTER_WEBUI_PORT=8080 \
+#SPARK_LOG_DIR=/opt/spark/logs \
+#SPARK_MASTER_LOG=/opt/spark/logs/spark-master.out \
+#SPARK_WORKER_LOG=/opt/spark/logs/spark-worker.out \
+#SPARK_WORKER_WEBUI_PORT=8080 \
+#SPARK_WORKER_PORT=7000 \
+#SPARK_MASTER="spark://spark-master:7077" \
+#SPARK_WORKLOAD="master"
 
-EXPOSE 8080 7077 6066
+#EXPOSE 8080 7077 6066
 
-RUN mkdir -p $SPARK_LOG_DIR && \
-touch $SPARK_MASTER_LOG && \
-touch $SPARK_WORKER_LOG && \
-ln -sf /dev/stdout $SPARK_MASTER_LOG && \
-ln -sf /dev/stdout $SPARK_WORKER_LOG
+#RUN mkdir -p $SPARK_LOG_DIR && \
+#touch $SPARK_MASTER_LOG && \
+#touch $SPARK_WORKER_LOG && \
+#ln -sf /dev/stdout $SPARK_MASTER_LOG && \
+#ln -sf /dev/stdout $SPARK_WORKER_LOG
 
 #COPY start-spark.sh /
 COPY ./app /opt/spark-apps
 COPY ./data /opt/spark-data
+COPY submit-code.sh /
 

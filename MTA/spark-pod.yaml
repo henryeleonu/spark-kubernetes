@@ -3,7 +3,7 @@
   kind: Pod
   metadata:
     name: spark-pod
-    #namespace: spark-and-postgres
+    namespace: default
     labels:
       app: spark-pod
   spec:
