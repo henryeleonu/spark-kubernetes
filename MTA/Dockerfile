@@ -1,41 +1,42 @@
 # builder step used to download and configure spark environment
-FROM openjdk:11.0.11-jre-slim-buster as builder
+#FROM openjdk:11.0.11-jre-slim-buster as builder
+FROM heleonu/spark-py:1.1
 
 # Add Dependencies for PySpark
-RUN apt-get update && apt-get install -y curl \
-vim wget software-properties-common ssh net-tools \
-ca-certificates python3 python3-pip python3-numpy \
-python3-matplotlib python3-scipy python3-pandas \
-python3-simpy unzip
+#RUN apt-get update && apt-get install -y curl \
+#vim wget software-properties-common ssh net-tools \
+#ca-certificates python3 python3-pip python3-numpy \
+#python3-matplotlib python3-scipy python3-pandas \
+#python3-simpy unzip
 
-RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
+#RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
 
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
-ENV SPARK_VERSION=3.0.2 \
-HADOOP_VERSION=3.2 \
-SPARK_HOME=/opt/spark \
-PYTHONHASHSEED=1
+#ENV SPARK_VERSION=3.0.2 \
+#HADOOP_VERSION=3.2 \
+#SPARK_HOME=/opt/spark \
+#PYTHONHASHSEED=1
 
 # Download and uncompress spark from the apache archive
-RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" \
-&& mkdir -p /opt/spark \
-&& tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 \
-&& rm apache-spark.tgz
+#RUN wget --no-verbose -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" \
+#&& mkdir -p /opt/spark \
+#&& tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 \
+#&& rm apache-spark.tgz
 
 #Download and uncompress kubernetes
-RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
-RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
-RUN chmod 755 kubernetes/client/bin/kubectl
-RUN mv kubernetes/client/bin/kubectl /bin/
-RUN rm -Rf kubernetes
-RUN rm kubernetes-client-linux-amd64.tar.gz
+#RUN wget https://dl.k8s.io/v1.21.0/kubernetes-client-linux-amd64.tar.gz
+#RUN tar xvfz kubernetes-client-linux-amd64.tar.gz
+#RUN chmod 755 kubernetes/client/bin/kubectl
+#RUN mv kubernetes/client/bin/kubectl /bin/
+#RUN rm -Rf kubernetes
+#RUN rm kubernetes-client-linux-amd64.tar.gz
 
 
 # Apache spark environment
-FROM builder as apache-spark
+#FROM builder as apache-spark
 
-WORKDIR /opt/spark
+#WORKDIR /opt/spark
 
 #ENV SPARK_MASTER_PORT=7077 \
 #SPARK_MASTER_WEBUI_PORT=8080 \
@@ -54,7 +55,7 @@ WORKDIR /opt/spark
 #touch $SPARK_WORKER_LOG && \
 #ln -sf /dev/stdout $SPARK_MASTER_LOG && \
 #ln -sf /dev/stdout $SPARK_WORKER_LOG
-
+RUN apt-get install -y unzip
 #COPY start-spark.sh /
 COPY ./app /opt/spark-apps
 COPY ./data /opt/spark-data
