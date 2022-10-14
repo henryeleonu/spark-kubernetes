@@ -13,7 +13,7 @@
       #fsGroup: 2000
     containers:
       - name: spark-container-official
-        image: heleonu/spark-py:1.1
+        image: heleonu/spark-py-kube:1.1
         imagePullPolicy: "IfNotPresent"
         command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
         ports:

@@ -33,6 +33,7 @@ FROM heleonu/spark-py:1.1
 #RUN rm kubernetes-client-linux-amd64.tar.gz
 
 
+
 # Apache spark environment
 #FROM builder as apache-spark
 
@@ -55,7 +56,10 @@ FROM heleonu/spark-py:1.1
 #touch $SPARK_WORKER_LOG && \
 #ln -sf /dev/stdout $SPARK_MASTER_LOG && \
 #ln -sf /dev/stdout $SPARK_WORKER_LOG
-RUN apt-get install -y unzip
+
+RUN apt-get install -y curl && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl && mv ./kubectl /usr/local/bin && apt-get install -y unzip && apt-get install -y iputils-ping && apt-get install -y dnsutils
+
 #COPY start-spark.sh /
 COPY ./app /opt/spark-apps
 COPY ./data /opt/spark-data

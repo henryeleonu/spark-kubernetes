@@ -7,6 +7,7 @@ apiVersion: apps/v1
 kind: Deployment # Create a deployment
 metadata:
   name: postgres # Set the name of the deployment
+  namespace: default
   #namespace: spark-and-postgres
 spec:
   replicas: 1 # Set deployment replicas
@@ -20,7 +21,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:10.1  # Docker image
+          image: postgres:14-alpine  # Docker image
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432  # Exposing the container port 5432 for PostgreSQL client connections.

@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col,date_format
+from pyspark.sql.functions import col, date_format
 
 def init_spark():
   sql = SparkSession.builder\
@@ -10,7 +10,7 @@ def init_spark():
   return sql,sc
 
 def main():
-  url = "jdbc:postgresql://postgres:5432/mta_data"
+  url = "jdbc:postgresql://postgres.default.svc.cluster.local:31653/mta_data"
   properties = {
     "user": "postgres",
     "password": "admin123",
@@ -29,9 +29,8 @@ def main():
   
   df.show()
 
-  df.write \
-    .jdbc(url=url, table="mta_reports", mode='append', properties=properties) \
-    .save()
+  df.write.jdbc(url=url, table="mta_reports", mode='append', properties=properties) 
+    #.save()
 
 if __name__ == '__main__':
   main()
