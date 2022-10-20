@@ -9,6 +9,19 @@
 #--executor-memory 1G \
 #/opt/spark-apps/main.py"
 
+#$SPARK_HOME/bin/spark-submit \
+    #--conf spark.kubernetes.authenticate.driver.serviceAccountName=spark-sa \
+    #--master k8s://https://kubernetes.docker.internal:6443 \
+    #--deploy-mode cluster \
+    #--name trip-app \
+    #--conf spark.jars.ivy=/tmp/.ivy \
+    #--files local:///opt/spark-data/MTA_2014_08_01.csv \
+    #--conf spark.executor.instances=2 \
+    #--conf spark.kubernetes.container.image=heleonu/spark-py-kube:1.1 \
+    #--jars local:///opt/spark-apps/postgresql-42.2.22.jar \
+    #local:///opt/spark-apps/main.py
+   
+    
 $SPARK_HOME/bin/spark-submit \
     --conf spark.kubernetes.authenticate.driver.serviceAccountName=spark-sa \
     --master k8s://https://kubernetes.docker.internal:6443 \
@@ -16,12 +29,17 @@ $SPARK_HOME/bin/spark-submit \
     --name trip-app \
     --conf spark.jars.ivy=/tmp/.ivy \
     --files local:///opt/spark-data/MTA_2014_08_01.csv \
-    --conf spark.executor.instances=2 \
+    --conf spark.dynamicAllocation.enabled=true \
+    --conf spark.dynamicAllocation.shuffleTracking.enabled=true \
+    --conf spark.dynamicAllocation.shuffleTracking.timeout=120 \
+    --conf spark.dynamicAllocation.minExecutors=1 \
+    --conf spark.dynamicAllocation.maxExecutors=3 \
+    --conf spark.kubernetes.allocation.batch.size=3 \
+    --conf spark.dynamicAllocation.executorAllocationRatio=1 \
+    --conf spark.dynamicAllocation.schedulerBacklogTimeout=1 \
     --conf spark.kubernetes.container.image=heleonu/spark-py-kube:1.1 \
     --jars local:///opt/spark-apps/postgresql-42.2.22.jar \
     local:///opt/spark-apps/main.py
-    #--jars local:///opt/spark/examples/jars/spark-examples_2.12-3.3.0.jar \
-    #local:///opt/spark/examples/src/main/python/pi.py 
     
     
 
