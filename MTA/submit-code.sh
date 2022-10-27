@@ -1,6 +1,6 @@
 #kubectl exec -it spark-pod bash
 #cd /opt/spark-data
-#unzip -o MTA_2014_08-10.zip
+#unzip -o MTA_2014_08_01.zip
 #cd /opt/spark
 #echo finished unzipping...
 #/opt/spark/bin/spark-submit --master spark://spark-master:7077 \

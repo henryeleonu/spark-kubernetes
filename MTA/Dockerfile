@@ -12,3 +12,8 @@ COPY ./app /opt/spark-apps
 COPY ./data /opt/spark-data
 COPY submit-code.sh /
 
+RUN cd /opt/spark-data && tar -xzf MTA_2014_08_01.tar.gz && rm MTA_2014_08_01.tar.gz
+#RUN sleep 10s
+#RUN cd /opt/spark-data
+#RUN unzip -o MTA_2014_08-10.zip
+
