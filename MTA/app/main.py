@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, date_format
+import os
 
 def init_spark():
   sql = SparkSession.builder\
@@ -10,12 +11,21 @@ def init_spark():
   return sql,sc
 
 def main():
+  #databasename = os.getenv('POSTGRES_DB')
+  username = os.environ['POSTGRES_USER']
+  password = os.environ['POSTGRES_PASSWORD']
+  #hostname = os.getenv('POSTGRES_SERVICE_NAME')
+  #port = os.getenv('POSTGRES_SERVICE_PORT')
+  #postgres.default.svc.cluster.local
   url = "jdbc:postgresql://postgres.default.svc.cluster.local:31653/mta_data"
+  #url = "jdbc:postgresql://" + hostname + ":" + port + "/" + databasename
+  print(url)
   properties = {
-    "user": "postgres",
-    "password": "admin123",
+    "user": username,
+    "password": password,
     "driver": "org.postgresql.Driver"
   }
+
   file = "/opt/spark-data/MTA_2014_08_01.csv"
   sql,sc = init_spark()
 

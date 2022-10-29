@@ -18,6 +18,10 @@
     #--files local:///opt/spark-data/MTA_2014_08_01.csv \
     #--conf spark.executor.instances=2 \
     #--conf spark.kubernetes.container.image=heleonu/spark-py-kube:1.1 \
+    #--conf spark.kubernetes.driver.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \
+    #--conf spark.kubernetes.executor.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \
+    #--conf spark.kubernetes.driver.secretKeyRef.POSTGRES_PASSWORD=mysecret:POSTGRES_PASSWORD \
+    #--conf spark.kubernetes.executor.secretKeyRef.POSTGRES_PASSWORD=mysecret:POSTGRES_PASSWORD \
     #--jars local:///opt/spark-apps/postgresql-42.2.22.jar \
     #local:///opt/spark-apps/main.py
    
@@ -38,6 +42,10 @@ $SPARK_HOME/bin/spark-submit \
     --conf spark.dynamicAllocation.executorAllocationRatio=1 \
     --conf spark.dynamicAllocation.schedulerBacklogTimeout=1 \
     --conf spark.kubernetes.container.image=heleonu/spark-py-kube:1.1 \
+    --conf spark.kubernetes.driver.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \
+    --conf spark.kubernetes.executor.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \
+    --conf spark.kubernetes.driver.secretKeyRef.POSTGRES_PASSWORD=mysecret:POSTGRES_PASSWORD \
+    --conf spark.kubernetes.executor.secretKeyRef.POSTGRES_PASSWORD=mysecret:POSTGRES_PASSWORD \
     --jars local:///opt/spark-apps/postgresql-42.2.22.jar \
     local:///opt/spark-apps/main.py
     

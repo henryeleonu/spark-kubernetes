@@ -6,11 +6,9 @@ kind: ConfigMap
 metadata:
   name: postgres-config
   namespace: default
-  labels:
-    app: postgres
 data:
-  POSTGRES_DB: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: admin123
+  POSTGRES_SERVICE_NAME: postgres.default.svc.cluster.local
+  POSTGRES_SERVICE_PORT: "31653"
+  
 
   

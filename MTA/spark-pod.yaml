@@ -7,10 +7,7 @@
     labels:
       app: spark-pod
   spec:
-    #securityContext:
-      #runAsUser: 1000
-      #runAsGroup: 3000
-      #fsGroup: 2000
+    serviceAccountName: spark-sa
     containers:
       - name: spark-container-official
         image: heleonu/spark-py-kube:1.1
@@ -19,9 +16,12 @@
         ports:
           - containerPort: 7077
           - containerPort: 8080
-        #securityContext:
-          #allowPrivilegeEscalation: false
-    serviceAccountName: spark-sa
+        envFrom:
+          - secretRef:
+              name: mysecret
+          - configMapRef:
+              name: postgres-config  # Using the ConfigMap postgres-config
+        
       #- name: kube-proxy-sidecar
         #image: bitnami/kubectl
         #command: ["kubectl", "proxy"]
