@@ -5,9 +5,14 @@ metadata:
   name: spark-cluster
   region: eu-west-2
   version: "1.23"
-availabilityZones:
-- eu-west-2a
-- eu-west-2b
+vpc:
+  subnets:
+    private:
+      eu-west-2a: { id: subnet-0dc2e42de958c87c9 }
+      eu-west-2b: { id: subnet-05ec02d15637ed38c }
+#availabilityZones:
+#- eu-west-2a
+#- eu-west-2b
 managedNodeGroups:
 - name: managed-nodes
   labels:
