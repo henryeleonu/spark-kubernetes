@@ -1,14 +1,19 @@
+
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
-
 metadata:
   name: spark-cluster
-  region: us-east-1
-
-nodeGroups:
-  - name: spark-nodes
-    instanceType: t2.micro
-    desiredCapacity: 2
-    volumeSize: 80
-    ssh:
-      allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key
+  region: eu-west-2
+  version: "1.20"
+availabilityZones:
+- eu-west-2a
+- eu-west-2b
+managedNodeGroups:
+- name: managed-nodes
+  labels:
+    role: managed-nodes
+  instanceType: t2.micro
+  minSize: 1
+  maxSize: 10
+  desiredCapacity: 1
+  volumeSize: 20
