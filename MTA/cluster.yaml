@@ -1,0 +1,41 @@
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: spark-cluster
+  region: eu-west-2
+  version: "1.23"
+vpc:
+  subnets:
+    public:
+      eu-west-2a: { id: subnet-06ad5ca10f099ae2f }
+      eu-west-2b: { id: subnet-01810e3c7d4787d62 }
+    private:
+      eu-west-2a: { id: subnet-0dc2e42de958c87c9 }
+      eu-west-2b: { id: subnet-05ec02d15637ed38c }
+#availabilityZones:
+#- eu-west-2a
+#- eu-west-2b
+managedNodeGroups:
+- name: managed-nodes
+  labels:
+    role: managed-nodes
+  instanceType: t2.micro
+  minSize: 1
+  maxSize: 10
+  desiredCapacity: 1
+  volumeSize: 20
+  iam:
+      withAddonPolicies:
+        autoScaler: true
+cloudWatch:
+  clusterLogging:
+    enableTypes: 
+      - "controllerManager"
+iam:
+  withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: spark-sa
+    attachPolicyARNs:
+    - arn:aws:iam::aws:policy/AmazonRDSFullAccess

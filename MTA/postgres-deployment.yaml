@@ -7,6 +7,7 @@ apiVersion: apps/v1
 kind: Deployment # Create a deployment
 metadata:
   name: postgres # Set the name of the deployment
+  namespace: default
   #namespace: spark-and-postgres
 spec:
   replicas: 1 # Set deployment replicas
@@ -20,13 +21,26 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:10.1  # Docker image
+          image: postgres:14-alpine  # Docker image
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432  # Exposing the container port 5432 for PostgreSQL client connections.
-          envFrom:
-            - configMapRef:
-                name: postgres-config  # Using the ConfigMap postgres-config
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: POSTGRES_USER
+                  optional: false # same as default; "mysecret" must exist
+                                  # and include a key named "username"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: POSTGRES_PASSWORD
+                  optional: false # same as default; "mysecret" must exist
+                                  # and include a key named "password"
+            
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb

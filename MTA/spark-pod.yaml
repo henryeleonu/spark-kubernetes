@@ -3,17 +3,25 @@
   kind: Pod
   metadata:
     name: spark-pod
-    #namespace: spark-and-postgres
+    namespace: default
     labels:
       app: spark-pod
   spec:
+    serviceAccountName: spark-sa
     containers:
-      - name: spark-container
-        image: heleonu/spark-pod:1
+      - name: spark-container-official
+        image: heleonu/spark-py-kube:1.1
+        imagePullPolicy: "IfNotPresent"
         command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
         ports:
           - containerPort: 7077
           - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: mysecret
+          - configMapRef:
+              name: postgres-config  # Using the ConfigMap postgres-config
+        
       #- name: kube-proxy-sidecar
         #image: bitnami/kubectl
         #command: ["kubectl", "proxy"]

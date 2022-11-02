@@ -16,6 +16,7 @@ spec:
       containers:
         - name: spark
           image: heleonu/spark-and-kubernetes:1
+          imagePullPolicy: "IfNotPresent"
           #command: ["/bin/bash", "-c", "while true; do echo 1; sleep 1; done"]
           ports:
             - containerPort: 7077
