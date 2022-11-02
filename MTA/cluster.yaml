@@ -2,7 +2,7 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: spark-cluster
+  name: spark-nodes
   region: eu-west-2
   version: "1.23"
 vpc:
@@ -23,7 +23,7 @@ managedNodeGroups:
   instanceType: t2.micro
   minSize: 1
   maxSize: 10
-  desiredCapacity: 1
+  desiredCapacity: 2
   volumeSize: 20
   iam:
       withAddonPolicies:
