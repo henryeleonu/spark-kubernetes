@@ -41,6 +41,7 @@ $SPARK_HOME/bin/spark-submit \
     --conf spark.kubernetes.allocation.batch.size=3 \
     --conf spark.dynamicAllocation.executorAllocationRatio=1 \
     --conf spark.dynamicAllocation.schedulerBacklogTimeout=1 \
+    --conf spark.kubernetes.namespace=default \
     --conf spark.kubernetes.container.image=heleonu/spark-py-kube:1.1 \
     --conf spark.kubernetes.driver.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \
     --conf spark.kubernetes.executor.secretKeyRef.POSTGRES_USER=mysecret:POSTGRES_USER \

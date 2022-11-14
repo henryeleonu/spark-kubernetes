@@ -14,11 +14,11 @@ def main():
   #databasename = os.getenv('POSTGRES_DB')
   username = os.environ['POSTGRES_USER']
   password = os.environ['POSTGRES_PASSWORD']
-  #hostname = os.getenv('POSTGRES_SERVICE_NAME')
-  #port = os.getenv('POSTGRES_SERVICE_PORT')
+  hostname = os.getenv('POSTGRES_SERVICE_HOST')
+  port = os.getenv('POSTGRES_SERVICE_PORT')
   #postgres.default.svc.cluster.local
-  url = "jdbc:postgresql://postgres.default.svc.cluster.local:31653/mta_data"
-  #url = "jdbc:postgresql://" + hostname + ":" + port + "/" + databasename
+  #url = "jdbc:postgresql://postgres.default.svc.cluster.local:31653/mta_data"
+  url = "jdbc:postgresql://" + hostname + ":" + port + "/mta_data" #+ databasename
   print(url)
   properties = {
     "user": username,

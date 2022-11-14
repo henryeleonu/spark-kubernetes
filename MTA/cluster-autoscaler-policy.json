@@ -11,7 +11,7 @@
             "Resource": "*",
             "Condition": {
                 "StringEquals": {
-                    "aws:ResourceTag/k8s.io/cluster-autoscaler/spark-nodes": "owned"
+                    "aws:ResourceTag/k8s.io/cluster-autoscaler/spark-eks-practices": "owned"
                 }
             }
         },

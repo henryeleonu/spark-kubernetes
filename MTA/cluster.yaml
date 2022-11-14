@@ -23,19 +23,19 @@ managedNodeGroups:
   instanceType: t2.micro
   minSize: 1
   maxSize: 10
-  desiredCapacity: 2
+  desiredCapacity: 3
   volumeSize: 20
   iam:
       withAddonPolicies:
         autoScaler: true
-cloudWatch:
-  clusterLogging:
-    enableTypes: 
-      - "controllerManager"
-iam:
-  withOIDC: true
-  serviceAccounts:
-  - metadata:
-      name: spark-sa
-    attachPolicyARNs:
-    - arn:aws:iam::aws:policy/AmazonRDSFullAccess
+#cloudWatch:
+  #clusterLogging:
+    #enableTypes: 
+      #- "controllerManager"
+#iam:
+  #withOIDC: true
+  #serviceAccounts:
+  #- metadata:
+      #name: spark-sa
+    #attachPolicyARNs:
+    #- arn:aws:iam::aws:policy/AmazonRDSFullAccess
