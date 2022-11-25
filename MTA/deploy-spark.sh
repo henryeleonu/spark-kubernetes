@@ -9,3 +9,4 @@ kubectl apply -f postgres-login-secret.yaml
 kubectl apply -f postgres-configmap.yaml
 kubectl get configmap
 kubectl apply -f spark-pod.yaml 
+kubectl apply -f spark-headless-service.yaml

@@ -11,12 +11,15 @@
     serviceAccountName: spark-sa
     containers:
       - name: spark-container-official
-        image: heleonu/spark-py-kube:1.1
+        image: heleonu/spark-py-kube:1.2
         imagePullPolicy: Always   #"IfNotPresent" 
-        command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
+        #command: ["bash", "-c", "while true; do echo 1; sleep 1; done"]
+        command: ["jupyter", "notebook", "--ip", "0.0.0.0", "--allow-root"]
         ports:
           - containerPort: 7077
           - containerPort: 8080
+          - containerPort: 2222
+          - containerPort: 7777
         envFrom:
           - secretRef:
               name: mysecret
