@@ -23,23 +23,5 @@
         envFrom:
           - secretRef:
               name: mysecret
-          #- configMapRef:
-              #name: postgres-config  # Using the ConfigMap postgres-config
-        #volumeMounts:
-            #- name: spark-pod-template
-              ##mountPath: /opt/spark/conf/driver_pod_template.yml
-              #subPath: driver
-            #- name: spark-pod-template
-              #mountPath: /opt/spark/conf/executor_pod_template.yml
-              #subPath: executor
-    #volumes:
-        #- name: spark-pod-template
-          #configMap:
-            #name: spark-pod-config
-            #defaultMode: 420
-      #- name: kube-proxy-sidecar
-        #image: bitnami/kubectl
-        #command: ["kubectl", "proxy"]
-        #ports:
-          #- containerPort: 8001
+          
           
